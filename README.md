@@ -22,11 +22,11 @@
 ## 2. Description des fichiers principaux
 ### 2.1 Fichiers Terraform
 
-* **main.cf** — Décrit les ressources principales à déployer mais aussi l'adhération de la vault, la création des VM's, donner une IP publique et privé aux VM's qui sont elle dans 2 Réseaux différent.
+* **main.cf** — Décrit les ressources principales à déployer mais aussi l'adhération de la vault, la création des VM's, donner une IP publique et privée aux VM's qui sont elle dans 2 Réseaux différents.
 * **provider.tf** — Configure le fournisseur (Azure).
 * **variables.tf** — Définit les variables d’entrée utilisées dans les scripts par exemple la localisation sur azure eastus pour notre cas.
-* **output.tf** — Affichage des IP Publique des VM's.
-* **nsg.tf** — Crée et configure les Network Security Groups, ça ouvre le port 22 ainsi que la range de 30000-35000 pour que l'application nginx deployer sur kubernetes soit accessible.
+* **output.tf** — Affichage des IP Publiques des VM's.
+* **nsg.tf** — Crée et configure les Network Security Groups, ça ouvre le port 22 ainsi que la range de 30000-35000 pour que l'application nginx deployée sur kubernetes soit accessible.
 * **terraform.tfstate / terraform.tfstate.backup** — Fichiers d’état de Terraform.
 
 ### 2.2 Module réseau
@@ -34,12 +34,12 @@
 * **modules/network/variables.tf** — Variables spécifiques au module réseau.
 
 ### 2.3 Fichiers Ansible
-* **inventory.ini** — liste des deux VM's deployer sur Azure.
-* **playbook.yml** — Tâches Ansible pour installer K3s sur les VM's déployer ainsi que l'initialisation du cluster.
+* **inventory.ini** — liste des deux VM's deployées sur Azure.
+* **playbook.yml** — Tâches Ansible pour installer K3s sur les VM's déployées ainsi que l'initialisation du cluster.
 * **deployment.yml** — Déploiement de l'application Nginx.
 
 ### 2.4 Vault
-Ajout d'une Vault en local pour le stockage des secrets, dans notre cas nous stockant uniquement le username qui nous permet d'accèder au VM's.
+Ajout d'une Vault en locale pour le stockage des secrets, dans notre cas nous stockons uniquement le username qui nous permet d'accéder au VM's.
 
 ### 2.5 Déploiement de l'application
 Pour déployer l'application dans un premier temps nous éxécutant,
