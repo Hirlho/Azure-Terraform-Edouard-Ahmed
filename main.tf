@@ -1,6 +1,6 @@
 provider "vault" {
   address = "http://127.0.0.1:8200"
-  token   = "hvs.tQhcAaWStdZhCFrrLDQqWsLS"
+  token   = "<token>"
 }
 
 data "vault_generic_secret" "admin" {
@@ -51,6 +51,19 @@ resource "azurerm_network_interface" "nic" {
   }
 }
 
+resource "local_file" "inventory_ini" {
+  content = <<EOL
+[k3s_master]
+vm-master ansible_host=${azurerm_public_ip.public_ip[0].ip_address} ansible_user=azureuser ansible_ssh_private_key_file=~/.ssh/id_rsa
+
+[k3s_worker]
+vm-worker ansible_host=${azurerm_public_ip.public_ip[1].ip_address} ansible_user=azureuser ansible_ssh_private_key_file=~/.ssh/id_rsa
+EOL
+
+  filename = "./inventory.ini"
+}
+
+
 resource "azurerm_linux_virtual_machine" "vm" {
   count                = var.vm_count
   name                 = "vm-${count.index}"
@@ -77,4 +90,11 @@ resource "azurerm_linux_virtual_machine" "vm" {
     sku       = "20_04-lts"
     version   = "latest"
   }
+
+
+
+
+
+
+
 }
